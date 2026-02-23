@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kezel Mabini | Official Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- GLOBAL STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(0, 0, 0, 0.95);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid #00ebff;
+        }
+
+        .logo { 
+            font-size: 1.5rem; 
+            font-weight: 800; 
+            color: #00ebff; 
+            letter-spacing: 2px; 
+            z-index: 1001;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .logo:hover {
+            text-shadow: 0 0 10px rgba(0, 235, 255, 0.5);
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: #00ebff;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav ul { display: flex; list-style: none; align-items: center; }
+        nav ul li { margin-left: 25px; }
+        nav ul li a { 
+            color: #fff; 
+            text-decoration: none; 
+            font-weight: 500; 
+            transition: 0.3s; 
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        nav ul li a:hover { color: #00ebff; }
+
+        /* --- HERO SLIDER --- */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 90vh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            animation: fadeEffect 1s;
+        }
+
+        @keyframes fadeEffect {
+            from {opacity: 0.4} to {opacity: 1}
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .hero-overlay h1 { 
+            font-size: clamp(3rem, 8vw, 5rem); 
+            text-transform: uppercase; 
+            color: #00ebff; 
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero-overlay p {
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            font-weight: 300;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 20px;
+            color: #00ebff;
+            font-size: 30px;
+            background: rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+            z-index: 100;
+            transition: 0.3s;
+        }
+        .prev:hover, .next:hover { background: rgba(0, 235, 255, 0.2); }
+        .next { right: 0; border-radius: 5px 0 0 5px; }
+        .prev { left: 0; border-radius: 0 5px 5px 0; }
+
+        /* --- SECTIONS --- */
+        section { padding: 100px 10%; text-align: center; }
+        h2 { 
+            font-size: 2.5rem; 
+            margin-bottom: 50px; 
+            color: #00ebff; 
+            text-transform: uppercase; 
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #00ebff;
+            margin: 15px auto;
+        }
+
+        .brand-grid { 
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        .brand-card {
+            border: 1px solid #333;
+            padding: 40px;
+            background: #161616;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: 0.4s;
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+        .brand-card:hover { 
+            border-color: #00ebff; 
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 235, 255, 0.1);
+            color: #00ebff;
+        }
+
+        .stats-section {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            background: #00ebff;
+            color: #000;
+            padding: 60px 10%;
+            gap: 30px;
+        }
+        .stat-item h3 { font-size: 3.5rem; line-height: 1; }
+        .stat-item p { font-weight: bold; text-transform: uppercase; opacity: 0.8; }
+
+        .promo-box {
+            background: linear-gradient(135deg, #00ebff, #0077ff);
+            padding: 60px 40px;
+            border-radius: 20px;
+            color: #000;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .btn-store {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 18px 45px;
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 800;
+            transition: 0.3s;
+        }
+        .btn-store:hover { transform: scale(1.05); background: #222; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .grid-item { overflow: hidden; border-radius: 12px; height: 350px; }
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        .grid-item img:hover { transform: scale(1.1); filter: brightness(1.1); }
+
+        /* --- LIGHTBOX --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            padding: 50px 20px;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content { 
+            display: block; 
+            max-width: 90%; 
+            max-height: 80vh; 
+            border: 2px solid #00ebff;
+        }
+        .close { 
+            position: absolute; 
+            top: 30px; 
+            right: 40px; 
+            color: #00ebff; 
+            font-size: 50px; 
+            cursor: pointer; 
+        }
+
+        footer { 
+            background: #000; 
+            padding: 80px 10% 40px; 
+            border-top: 1px solid #222; 
+            text-align: center;
+        }
+        .social-links { margin: 30px 0; }
+        .social-links a { 
+            color: #fff; 
+            text-decoration: none; 
+            margin: 0 20px; 
+            font-size: 1.5rem; 
+            transition: 0.3s;
+        }
+        .social-links a:hover { color: #00ebff; }
+        .copy { margin-top: 40px; font-size: 0.8rem; opacity: 0.4; letter-spacing: 1px; }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 850px) {
+            .burger { display: block; }
+            nav ul {
+                position: fixed;
+                right: 0px;
+                height: 100vh;
+                top: 0;
+                background-color: rgba(10, 10, 10, 0.98);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                transform: translateX(100%);
+                transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+                z-index: 1000;
+            }
+            nav ul li { margin: 25px 0; }
+            nav ul li a { font-size: 1.5rem; }
+            .nav-active { transform: translateX(0%); }
+            .toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+            .toggle .line2 { opacity: 0; }
+            .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
+            .hero-overlay h1 { font-size: 3.5rem; }
+            .stats-section { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">KEZEL MABINI</a>
+        <ul id="nav-links">
+            <li><a href="#brands" onclick="toggleMenu()">Partnerships</a></li>
+            <li><a href="#videograms" onclick="toggleMenu()">Videograms</a></li>
+            <li><a href="#gallery" onclick="toggleMenu()">Gallery</a></li>
+            <li><a href="https://www.facebook.com/kitlay.mabini" target="_blank" style="color:#00ebff">Collaborate</a></li>
+        </ul>
+        <div class="burger" id="burger" onclick="toggleMenu()">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <div class="slider-container" id="top">
+        <div class="hero-overlay">
+            <h1>Kezel Mabini</h1>
+            <p>PH LADY RIDER • CFMOTO AMBASSADRESS</p>
+        </div>
+        
+        <div class="slide"><img src="klay13.jpg" alt="Kezel Mabini 1"></div>
+        <div class="slide"><img src="klay11.jpg" alt="Kezel Mabini 2"></div>
+        <div class="slide"><img src="klay15.jpg" alt="Kezel Mabini 3"></div>
+
+        <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(1)">&#10095;</button>
+    </div>
+
+    <section id="brands">
+        <h2>Official Partnerships</h2>
+        <div class="brand-grid">
+            <a href="https://www.facebook.com/CFMOTOCagayandeOro" target="_blank" class="brand-card">CFMOTO PHILIPPINES</a>
+            <a href="https://www.facebook.com/rdmcdo" target="_blank" class="brand-card">RDM LIGHTS</a>
+            <a href="https://www.facebook.com/xadophilippines" target="_blank" class="brand-card">XADO LUBRICANTS</a>
+        </div>
+    </section>
+
+    <div class="stats-section">
+        <div class="stat-item">
+            <h3 class="counter" data-target="435000">0</h3>
+            <p>Community Reach</p>
+        </div>
+        <div class="stat-item">
+            <h3 class="counter" data-target="150">0</h3>
+            <p>Track & Ride Events</p>
+        </div>
+        <div class="stat-item">
+            <h3 class="counter" data-target="3">0</h3>
+            <p>Brand Collaborations</p>
+        </div>
+    </div>
+
+    <section id="videograms">
+        <div class="promo-box">
+            <h2>Personalized Videograms</h2>
+            <p style="margin-bottom: 20px; font-weight: 400; opacity: 0.9;">
+                Get a closer look into the life of a rider! Whether you're looking for professional brand shoutouts, 
+                motivational messages, or personal greetings, I'm now accepting custom video requests.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px; text-align: left;">
+                <div style="background: rgba(0,0,0,0.15); padding: 20px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);">
+                    <i class="fas fa-birthday-cake" style="color: #000; font-size: 1.5rem; margin-bottom: 12px;"></i>
+                    <h4 style="text-transform: uppercase; font-size: 0.9rem; margin-bottom: 8px;">Special Greetings</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.4;">Birthdays, anniversaries, or wedding shoutouts with a rider's touch.</p>
+                </div>
+                <div style="background: rgba(0,0,0,0.15); padding: 20px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);">
+                    <i class="fas fa-motorcycle" style="color: #000; font-size: 1.5rem; margin-bottom: 12px;"></i>
+                    <h4 style="text-transform: uppercase; font-size: 0.9rem; margin-bottom: 8px;">Moto Motivation</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.4;">Personalized tips or encouragement for aspiring lady riders and enthusiasts.</p>
+                </div>
+                <div style="background: rgba(0,0,0,0.15); padding: 20px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);">
+                    <i class="fas fa-bullhorn" style="color: #000; font-size: 1.5rem; margin-bottom: 12px;"></i>
+                    <h4 style="text-transform: uppercase; font-size: 0.9rem; margin-bottom: 8px;">Brand Features</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.4;">Professional product mentions or event invites for your business or shop.</p>
+                </div>
+            </div>
+
+            <a href="https://www.facebook.com/kitlay.mabini/storefront" target="_blank" class="btn-store">REQUEST A VIDEO</a>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2>Life on Two Wheels</h2>
+        <div class="grid">
+            <div class="grid-item"><img src="klay.jpg" alt="Gallery 1" onclick="openLightbox(this.src)"></div>
+            <div class="grid-item"><img src="klay4.jpg" alt="Gallery 2" onclick="openLightbox(this.src)"></div>
+            <div class="grid-item"><img src="klay5.jpg" alt="Gallery 3" onclick="openLightbox(this.src)"></div>
+            <div class="grid-item"><img src="klay6.jpg" alt="Gallery 4" onclick="openLightbox(this.src)"></div>
+            <div class="grid-item"><img src="klay9.jpg" alt="Gallery 5" onclick="openLightbox(this.src)"></div>
+            <div class="grid-item"><img src="klay8.jpg" alt="Gallery 6" onclick="openLightbox(this.src)"></div>
+            <div class="grid-item"><img src="klay10.jpg" alt="Gallery 6" onclick="openLightbox(this.src)"></div>
+            <div class="grid-item"><img src="klay11.jpg" alt="Gallery 6" onclick="openLightbox(this.src)"></div>
+        </div>
+    </section>
+
+    <div id="lightbox" class="modal">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+
+    <footer>
+        <p style="font-weight: bold; letter-spacing: 2px;">CONNECT WITH ME</p>
+        <div class="social-links">
+            <a href="https://www.facebook.com/kitlay.mabini" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://instagram.com/imkezeeel?igshid=OGQ5ZDc2ODk2ZA==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@kezelmabini?_t=ZS-8y84Uqx8Vnt&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.youtube.com/@LadyJingjang" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p class="copy">© 2026 KEZEL MABINI | POWERED BY MTT COMMUNITY</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('nav-links');
+            const burger = document.getElementById('burger');
+            nav.classList.toggle('nav-active');
+            burger.classList.toggle('toggle');
+            document.body.style.overflow = nav.classList.contains('nav-active') ? 'hidden' : 'auto';
+        }
+
+        let slideIndex = 0;
+        let timer;
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            slides[slideIndex - 1].style.display = "block";
+            timer = setTimeout(showSlides, 5000); 
+        }
+        function changeSlide(n) {
+            clearTimeout(timer);
+            let slides = document.getElementsByClassName("slide");
+            slideIndex += n;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            if (slideIndex < 1) { slideIndex = slides.length }
+            for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+            slides[slideIndex - 1].style.display = "block";
+            timer = setTimeout(showSlides, 5000);
+        }
+        document.addEventListener('DOMContentLoaded', showSlides);
+
+        function openLightbox(src) {
+            const modal = document.getElementById("lightbox");
+            modal.style.display = "flex";
+            document.getElementById("img01").src = src;
+            document.body.style.overflow = "hidden";
+        }
+        function closeLightbox() {
+            document.getElementById("lightbox").style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        const counters = document.querySelectorAll('.counter');
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    const updateCount = () => {
+                        const count = +counter.innerText.replace(',', '');
+                        const inc = target / 100;
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc).toLocaleString();
+                            setTimeout(updateCount, 20);
+                        } else {
+                            counter.innerText = target.toLocaleString() + "+";
+                        }
+                    };
+                    updateCount();
+                    scrollObserver.unobserve(counter);
+                }
+            });
+        }, { threshold: 1 });
+        counters.forEach(c => scrollObserver.observe(c));
+    </script>
+</body>
+</html>
